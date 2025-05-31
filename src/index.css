@@ -1,0 +1,141 @@
+
+
+/* ===== Global Styles & Resets ===== */
+:root {
+  --primary-color: #ff9900; /* Amazon orange */
+  --secondary-color: #131921;
+  --light-bg: #f7f7f7;
+  --text-color: #131921;
+  --text-light: #555;
+  --white: #ffffff;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--light-bg);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #e88a00; /* Slightly darker orange */
+  text-decoration: underline;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #e88a00;
+}
+
+/* ===== App Layout ===== */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light-bg);
+}
+
+/* ===== Home Page Styles ===== */
+.home {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 10px;
+  flex: 1;
+}
+
+.home__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 -5px;
+  position: relative;
+  z-index: 1;
+}
+
+.home__image {
+  width: 100%;
+  height: auto;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  margin-bottom: -150px;
+}
+
+/* ===== Product Grid Responsiveness ===== */
+@media (max-width: 1200px) {
+  .home {
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 900px) {
+  .home__image {
+    margin-bottom: -100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home__row {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+
+  .home__image {
+    margin-bottom: -50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 0 5px;
+  }
+  
+  .home__image {
+    margin-bottom: -30px;
+  }
+}
+
+/* ===== Utility Classes ===== */
+.container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ===== Dark Mode Support ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #f0f0f0;
+    --light-bg: #131921;
+    --secondary-color: #0f141d;
+  }
+  
+  body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+  }
+}

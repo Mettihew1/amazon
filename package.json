@@ -1,0 +1,40 @@
+{
+  "name": "amazon",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@heroicons/react": "^2.2.0",
+    "@mui/icons-material": "^7.1.0",
+    "@mui/material": "^7.1.0",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@vitejs/plugin-react": "^4.2.1",
+    "axios": "^1.9.0",
+    "formik": "^2.4.6",
+    "framer-motion": "^12.15.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-number-format": "^5.4.4",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.6.1",
+    "react-slick": "^0.30.3",
+    "react-tooltip": "^5.28.1",
+    "slick-carousel": "^1.8.1",
+    "vite": "^5.1.4",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.27.1",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "eslint": "^9.27.0",
+    "eslint-plugin-react": "^7.37.5"
+  }
+}
