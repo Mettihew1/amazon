@@ -65,29 +65,19 @@ export default function SignUp() {
     }
 
     try {
-      axios.post("http://localhost:5000", "shit")
-      
-      // const response = await axios.post(
-      // 'http://localhost:5000/api/auth/register',
-      // {
-      //   body: JSON.stringify({
-      //     name: formData.name,
-      //     email: formData.email,
-      //     password: formData.password
-      //   }),
-      // });
+      const response = await axios.post('http://localhost:5000/api/auth/register', { name: formData.name, email: formData.email, password: formData.password })
 
-      // const data = await response.json();
+      const data = await response.json();
 
-      // if (!response.ok) {
-      //   throw new Error(data.message || 'Registration failed');
-      // }
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
 
-      // setSubmitSuccess(true);
-      // // Redirect to login after 2 seconds
-      // setTimeout(() => {
-      //   navigate('/login');
-      // }, 2000);
+      setSubmitSuccess(true);
+      // Redirect to login after 2 seconds
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
       
     } catch (error) {
       setErrors({ ...errors, submit: error.message });

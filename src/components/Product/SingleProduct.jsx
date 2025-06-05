@@ -2,30 +2,73 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import { addToBasket, selectBasketItems } from "../../store/slices/basketSlice";
-import './Product.css';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import axios from 'axios';
+import './SingleProduct.css';
 
-function Product({ id, title, image, price, rating }) {
+function SingleProduct({ id }) {
   const dispatch = useDispatch();
   const basketItems = useSelector(selectBasketItems);
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const MAX_QUANTITY = 10;
+
+  if (!id) {
+    return <div className="product product--error">Error: Missing Product ID</div>;
+  }
+
+  // Fetch product data from backend
+  useEffect(() => {
+    const fetchProduct = async () => {
+  try {
+    console.log(`Fetching product ${id}`);
+    const response = await axios.get(`${API_BASE_URL}/api/products/${id}`);
+    setProduct(response.data); // Add this line to store the product data
+  } catch (err) {
+    console.error("Full error:", {
+      config: err.config,
+      response: err.response?.data
+    });
+    setError(err.response?.data?.error || err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
+    fetchProduct();
+  }, [id]);
 
   // Check if product is already in basket
   useEffect(() => {
+    if (!product) return;
+
     const existingItem = basketItems.find(item => item.id === id);
     setIsAdded(!!existingItem);
     if (existingItem) setQuantity(existingItem.quantity);
-  }, [basketItems, id]);
+  }, [basketItems, id, product]);
+
+ const safeProduct = {
+  _id: product?._id || id,
+  name: product?.name || 'Product Name',
+  price: product?.price || 0,
+  discount: product?.discount || 0,  // Note: Your backend has 'discount' (15) not 'discount'
+  rating: product?.rating || 0,
+  reviews: product?.reviews?.length || product?.numReviews || 0,  // Handle both array and count
+  features: product?.features || [],
+  images: product?.images || ['/placeholder-image.jpg']
+};
 
   const handleAddToBasket = () => {
     dispatch(addToBasket({
-      id,
-      title,
-      image,
-      price,
-      rating,
+      id: safeProduct._id,
+      title: safeProduct.name,
+      image: safeProduct.images[0],
+      price: safeProduct.price,
+      rating: safeProduct.rating,
       quantity
     }));
 
@@ -37,6 +80,17 @@ function Product({ id, title, image, price, rating }) {
     const value = Math.min(MAX_QUANTITY, Math.max(1, Number(e.target.value) || 1));
     setQuantity(value);
   };
+
+  if (loading) return (
+    <div className="product product--loading">
+      <div className="product__skeleton-image" />
+      <div className="product__skeleton-text" />
+      <div className="product__skeleton-button" />
+    </div>
+  );
+
+  if (error) return <div className="product product--error">Error: {error}</div>;
+  if (!product) return <div className="product product--not-found">Product not found</div>;
 
   return (
     <motion.div 
@@ -50,27 +104,45 @@ function Product({ id, title, image, price, rating }) {
       transition={{ duration: 0.3 }}
       whileHover={{ scale: 1.02 }}
     >
+
+      <h1>see em?</h1>
+
+      
       <div className="product__info">
-        <h3 className="product__title">{title}</h3>
+        <h3 className="product__title">{safeProduct.name}</h3>
         
         <p className="product__price">
           <small>$</small>
-          <strong>{price.toFixed(2)}</strong>
+          <strong>{safeProduct.price.toFixed(2)}</strong>
+          {safeProduct.discount > 0 && (
+            <span className="product__discount">
+              {safeProduct.discount}% off
+            </span>
+          )}
         </p>
 
-        <div className="product__rating" aria-label={`Rating: ${rating} out of 5`}>
+        <div className="product__rating" aria-label={`Rating: ${safeProduct.rating} out of 5`}>
           {Array.from({ length: 5 }).map((_, i) => (
             <span key={i}>
-              {i < Math.floor(rating) ? '⭐' : i < rating ? '✨' : '☆'}
+              {i < Math.floor(safeProduct.rating) ? '⭐' : i < safeProduct.rating ? '✨' : '☆'}
             </span>
           ))}
-          <span className="rating-text">({rating})</span>
+          <span className="rating-text">({safeProduct.rating})</span>
+          <span className="review-count">({safeProduct.reviews} reviews)</span>
         </div>
+
+        {safeProduct.features.length > 0 && (
+          <ul className="product__features">
+            {safeProduct.features.slice(0, 3).map((feature, index) => (
+              <li key={index}>{feature}</li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <motion.img 
-        src={image} 
-        alt={title}
+        src={safeProduct.images[0]} 
+        alt={safeProduct.name}
         className="product__image"
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -136,4 +208,4 @@ function Product({ id, title, image, price, rating }) {
   );
 }
 
-export default Product;
+export default SingleProduct;

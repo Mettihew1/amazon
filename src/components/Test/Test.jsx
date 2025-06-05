@@ -2,7 +2,7 @@ export default function Test(){
     return(
         <div>
             <h1>
-                test
+                sup
             </h1>
         </div>
     )

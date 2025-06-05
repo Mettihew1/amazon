@@ -7,6 +7,9 @@ import Test from './components/Test/Test';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {store} from './store/store'
+import SingleProduct from './components/Product/SingleProduct';
+import Products from './components/Product/Products';
+
 
 function App() {
   return (
@@ -16,6 +19,8 @@ function App() {
       <div className="app">
         <Header />
         <Routes>
+          <Route path="/product/:id" element={<SingleProduct />} />  New syntax
+          <Route path="/products/" element={<Products />} />  New syntax
           <Route path="/test" element={<Test />} />  {/* New syntax */}
           <Route path="/login" element={<SignUp />} />  {/* New syntax */}
           <Route path="/checkout" element={<Checkout />} />  New syntax
