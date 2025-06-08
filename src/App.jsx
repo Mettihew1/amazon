@@ -9,6 +9,8 @@ import { Provider } from 'react-redux';
 import {store} from './store/store'
 import SingleProduct from './components/Product/SingleProduct';
 import Products from './components/Product/Products';
+import AdminProducts from './components/Admin/AdminProducts';
+import ErrorBoundary from './components/Error/ErrorBoundary';
 
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
       <div className="app">
         <Header />
         <Routes>
+          <Route path="/admin/products" element={<ErrorBoundary><AdminProducts /></ErrorBoundary>} />  New syntax
           <Route path="/product/:id" element={<SingleProduct />} />  New syntax
           <Route path="/products/" element={<Products />} />  New syntax
           <Route path="/test" element={<Test />} />  {/* New syntax */}

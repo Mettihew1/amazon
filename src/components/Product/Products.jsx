@@ -5,7 +5,6 @@ import { addToBasket, selectBasketItems } from "../../store/slices/basketSlice";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Products.css'; // We'll create this CSS file
-
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Products() {

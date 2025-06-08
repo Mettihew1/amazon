@@ -3,6 +3,7 @@ import './Home.css';
 import SignleProduct from '../Product/SingleProduct';
 import Carousel from '../Carousel/Carousel';
 import axios from 'axios';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -12,7 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        const response = await axios.get('/api/products/featured');
+        const response = await axios.get(`${API_BASE_URL}/api/products/featured`);
         
         // Ensure we always have an array, even if response.data is null/undefined
         const products = Array.isArray(response.data) ? response.data : [];
@@ -27,9 +28,6 @@ function Home() {
 
     fetchFeaturedProducts();
   }, []);
-
-  console.log(featuredProducts, 'can you see me');
-
 
   if (loading) return <div className="home__loading">Loading featured products...</div>;
   if (error) return <div className="home__error">Error: {error}</div>;
