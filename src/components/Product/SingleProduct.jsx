@@ -105,9 +105,6 @@ function SingleProduct({ id }) {
       whileHover={{ scale: 1.02 }}
     >
 
-      <h1>see em?</h1>
-
-      
       <div className="product__info">
         <h3 className="product__title">{safeProduct.name}</h3>
         

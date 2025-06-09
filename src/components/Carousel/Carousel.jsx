@@ -21,7 +21,7 @@ function Carousel() {
       <Slider {...settings}>
         <div className="slide">
           <img
-            src="https://m.media-amazon.com/images/I/61DUO0NqyyL._SX3000_.jpg"
+            src="https://fashiontikos.com/wp-content/uploads/2025/01/Lena-Paul-Bio-1.jpg"
             alt="Banner"
             className="carousel-image"
           />
