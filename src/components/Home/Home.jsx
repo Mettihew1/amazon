@@ -33,16 +33,10 @@ function Home() {
   if (error) return <div className="home__error">Error: {error}</div>;
   if (!featuredProducts.length) return <div className="home__empty">No featured products found</div>;
 
-  console.log(featuredProducts, 'can you see me');
-  
-
   return (
     <div className="home">
       <div className="home__container">
         <Carousel />
-
-
-        <h1>can you see me?</h1>
 
         {/* First row - 2 featured products */}
         <div className="home__row">
