@@ -3,15 +3,31 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../../store/slices/authSlice'; // Example action
+import { useNavigate } from 'react-router-dom';
 
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import { 
+  AppBar, 
+  Toolbar, 
+  IconButton, 
+  Drawer, 
+  List, 
+  ListItem, 
+  Typography 
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import BurgerMenu from '../Drawer'
+
 
 function Header() {
     // Redux selectors instead of useStateValue
     const basket = useSelector((state) => state.basket.items);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
+      const [isOpen, setIsOpen] = useState(false);
+      const navigate = useNavigate()
     
     const [searchInput, setSearchInput] = useState('');
 
@@ -24,12 +40,14 @@ function Header() {
 
     const handleSearchSubmit = (ev) => {
         ev.preventDefault();
-        console.log(searchInput);
-        // Dispatch search action here if needed
+        navigate(`/search?=${searchInput}`)        
     };
 
     return (
+        <div className='flex flex-col'>
+
         <div className="header">
+
             <Link to="/">
                 <img
                     className="header__logo"
@@ -44,7 +62,7 @@ function Header() {
                     type="text" 
                     onChange={(ev) => setSearchInput(ev.target.value)} 
                 />
-                <button className="header__searchIcon__button">
+                <button className="header__searchIcon__button" >
                     <SearchIcon className="header__searchIcon" />
                 </button>
             </form>
@@ -83,6 +101,40 @@ function Header() {
                 </Link>
             </div>
         </div>
+
+
+
+   
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton 
+            edge="start" 
+            color="inherit" 
+            onClick={() => setIsOpen(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <a href='/products' >All Products</a>
+            <a href='/about' >About</a>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      {/* Mobile Menu Drawer */}
+      <Drawer
+        anchor="left"
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+        <List>
+          <ListItem button component={Link} to="/">Home</ListItem>
+          <ListItem button component={Link} to="/about">About</ListItem>
+        </List>
+      </Drawer>
+
+        </div>
+
     );
 }
 

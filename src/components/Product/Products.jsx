@@ -55,11 +55,14 @@ function Products() {
           <div className="product-skeleton__button" />
         </div>
       ))}
+      <div className='products-container'>
+  <h1>hello</h1>hello
+</div>  
     </div>
   );
 
-  console.log(products, products.length);
-  
+
+
 
   if (error) return <div className="error-message">Error: {error}</div>;
   if (!products.length) return <div className="empty-message">No products available</div>;

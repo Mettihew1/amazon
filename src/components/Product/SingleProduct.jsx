@@ -6,7 +6,10 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import axios from 'axios';
 import './SingleProduct.css';
 
-function SingleProduct({ id }) {
+// import { useParams } from "react-router-dom";
+
+
+function SingleProduct({id}) {
   const dispatch = useDispatch();
   const basketItems = useSelector(selectBasketItems);
   const [quantity, setQuantity] = useState(1);
@@ -16,6 +19,8 @@ function SingleProduct({ id }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const MAX_QUANTITY = 10;
+  // const { id } = useParams(); 
+
 
   if (!id) {
     return <div className="product product--error">Error: Missing Product ID</div>;
@@ -27,6 +32,7 @@ function SingleProduct({ id }) {
   try {
     console.log(`Fetching product ${id}`);
     const response = await axios.get(`${API_BASE_URL}/api/products/${id}`);
+    
     setProduct(response.data); // Add this line to store the product data
   } catch (err) {
     console.error("Full error:", {
