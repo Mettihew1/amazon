@@ -1,7 +1,8 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
-import SignUp from './components/Sign-Up/SignUp';
+import SignUp from './components/User/SignUp';
+import Login from './components/User/Login';
 import Checkout from './components/Checkout/Checkout';
 import Test from './components/Test/Test';
 import { Routes, Route } from 'react-router-dom';
@@ -19,13 +20,14 @@ function App() {
       <Routes>
         <Route path="/search" element={<Search />} />
         <Route path="/about" element={<About />} />
-        <Route path="/admin/products" element={<ErrorBoundary><AdminProducts /></ErrorBoundary>} />
-        <Route path="/products/:id" element={<SingleProduct />} />
+        <Route path="/admin/prod" element={<ErrorBoundary><AdminProducts /></ErrorBoundary>} />
+        <Route path="/prod/:id" element={<SingleProduct />} />
         <Route path="/products" element={<Products />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/login" element={<SignUp />} />
+        <Route path="/register" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/" element={<Products />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );

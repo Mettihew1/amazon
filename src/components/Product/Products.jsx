@@ -18,7 +18,7 @@ function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/products`);
+        const response = await axios.get(`${API_BASE_URL}/api/prod`);
         setProducts(response.data.products);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -56,7 +56,6 @@ function Products() {
         </div>
       ))}
       <div className='products-container'>
-  <h1>hello</h1>hello
 </div>  
     </div>
   );
