@@ -22,6 +22,7 @@ const About = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
+       
         <Typography variant="h1" sx={{ fontSize: '4rem', fontWeight: 900, mb: 2 }}>
           About Me
         </Typography>
@@ -37,6 +38,9 @@ const About = () => {
         <Typography variant="h5" sx={{ maxWidth: '600px', mx: 'auto', mb: 4 }}>
           I’m a passionate developer who turns coffee into code ☕,  
           fights bugs like a superhero 🦸, and builds things that make people go *"WOW!"*  
+        </Typography>
+         <Typography variant="h6" sx={{ maxWidth: '600px', mx: 'auto', mb: 4 }}>
+          Contact me via my email mettihew@gmail.com
         </Typography>
       </motion.div>
 

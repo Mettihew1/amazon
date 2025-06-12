@@ -1,9 +1,8 @@
-cat << 'EOF' > render.yaml
 static_sites:
-  - name: eesy-ir  # Replace with your site name
+  - name: eesy
     build_command: npm run build
-    publish: dist/  # Or "build/" if your Vite uses that
+    publish: dist/
     routes:
       - path: "/*"
         rewrite: "/index.html"
-EOF
+
