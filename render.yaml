@@ -1,8 +1,7 @@
 static_sites:
   - name: eesy
-    build_command: npm run build
-    publish: dist/
+    build_command: npm install && npm run build  # Explicitly install deps
+    publish: dist/  # Must match Vite's outDir
     routes:
       - path: "/*"
         rewrite: "/index.html"
-
