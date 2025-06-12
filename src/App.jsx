@@ -28,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/" element={<Home />} />
+        <Route path="*" element={<Navigate to="/" />} /> {/* Important! */}
       </Routes>
     </div>
   );
